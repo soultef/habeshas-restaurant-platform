@@ -11,7 +11,7 @@
         <groupId>com.habeshas</groupId>
         <artifactId>restaurant-backend</artifactId>
         <version>1.0.0-SNAPSHOT</version>
-<!--        <relativePath>../pom.xml</relativePath>-->
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>brand-location-service</artifactId>
@@ -24,11 +24,28 @@
             <artifactId>spring-boot-starter-webmvc</artifactId>
         </dependency>
 
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>26.7.0</version>
+            <scope>runtime</scope>
+        </dependency>
+
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webmvc-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+
+
     </dependencies>
 
     <build>
