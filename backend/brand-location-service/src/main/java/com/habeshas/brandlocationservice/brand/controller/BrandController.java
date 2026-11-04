@@ -13,4 +13,6 @@ public class BrandController {
     public String getBrands() {
         return "Brands";
     }
+
+
 }
