@@ -1,12 +1,15 @@
 package com.habeshas.brandlocationservice.brand.entity;
 
 import com.habeshas.brandlocationservice.enums.BrandStatus;
+import com.habeshas.brandlocationservice.location.entity.RestaurantLocationEntity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -34,6 +37,9 @@ public class RestaurantBrandEntity {
 
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY)
+    private List<RestaurantLocationEntity> locations = new ArrayList<>();
 
     protected RestaurantBrandEntity() {
     }
