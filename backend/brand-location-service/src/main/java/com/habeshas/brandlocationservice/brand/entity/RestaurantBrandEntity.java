@@ -1,5 +1,6 @@
 package com.habeshas.brandlocationservice.brand.entity;
 
+import com.habeshas.brandlocationservice.brand.dtos.RestaurantBrandRequestDto;
 import com.habeshas.brandlocationservice.enums.BrandStatus;
 import com.habeshas.brandlocationservice.location.entity.RestaurantLocationEntity;
 import jakarta.persistence.*;
@@ -54,6 +55,20 @@ public class RestaurantBrandEntity {
     @PreUpdate
     protected void onUpdate() {
         this.updatedAt = LocalDateTime.now();
+    }
+
+
+    public static RestaurantBrandEntity create(
+            String brandName,
+            String description
+    ) {
+        RestaurantBrandEntity brand = new RestaurantBrandEntity();
+
+        brand.brandName = brandName;
+        brand.description = description;
+        brand.status = BrandStatus.ACTIVE;
+
+        return brand;
     }
 
     public UUID getId() {
