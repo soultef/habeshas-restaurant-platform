@@ -66,7 +66,8 @@ public class RestaurantLocationEntity {
             String phoneNumber,
             String email,
             String address,
-            String timezone
+            String timezone,
+            LocationStatus status
     ) {
         this.brand = Objects.requireNonNull(brand);
         this.locationName = locationName;
@@ -74,6 +75,7 @@ public class RestaurantLocationEntity {
         this.email = email;
         this.address = address;
         this.timezone = timezone;
+        this.status = status != null ? status : LocationStatus.ACTIVE;
     }
     @PrePersist
     protected void onCreate() {
@@ -85,6 +87,11 @@ public class RestaurantLocationEntity {
     @PreUpdate
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();
+    }
+
+
+    public UUID getId() {
+        return id;
     }
 
     public RestaurantBrandEntity getBrand() {

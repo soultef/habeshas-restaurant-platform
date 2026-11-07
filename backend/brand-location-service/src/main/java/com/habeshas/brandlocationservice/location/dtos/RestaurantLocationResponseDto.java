@@ -1,18 +1,19 @@
 package com.habeshas.brandlocationservice.location.dtos;
 
+import com.habeshas.brandlocationservice.enums.LocationStatus;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record RestaurantLocationResponseDto(
         UUID id,
         UUID brandId,
-        String name,
+        String locationName,
         String phone,
         String email,
         String address,
         String timezone,
-        String status,
         LocalDateTime createdAt,
-        LocalDateTime updatedAt
-) {
-}
+        LocalDateTime updatedAt,
+        LocationStatus status
+) {}
