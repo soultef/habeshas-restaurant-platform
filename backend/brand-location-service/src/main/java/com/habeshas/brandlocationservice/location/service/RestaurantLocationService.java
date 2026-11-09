@@ -17,15 +17,12 @@ public interface RestaurantLocationService {
     // Retrieve all restaurant locations
     List<RestaurantLocationResponseDto> getAllLocations();
 
-//
-//    // Retrieve locations belonging to a specific brand
-//    List<RestaurantLocationResponseDto> getLocationsByBrandId(UUID brandId);
-//
-//    // Update an existing location
-//    RestaurantLocationResponseDto updateLocation(
-//            UUID id,
-//            RestaurantLocationRequestDto request
-//    );
+
+    // Update an existing location
+    RestaurantLocationResponseDto updateLocation(
+            UUID id,
+            RestaurantLocationRequestDto request
+    );
 //
 //    // Update location status
 //    RestaurantLocationResponseDto updateLocationStatus(

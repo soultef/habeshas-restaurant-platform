@@ -71,4 +71,19 @@ public class RestaurantLocationServiceImpl implements RestaurantLocationService 
     }
 
 
+
+    @Override
+    public RestaurantLocationResponseDto updateLocation(
+            UUID id, RestaurantLocationRequestDto request){
+
+        RestaurantLocationEntity locationEntity = locationRepository
+                .findById(id).orElseThrow(() -> new LocationNotFoundException(id));
+
+        locationMapper.updateLocation(locationEntity, request);
+
+        return locationMapper.toResponseDto(locationEntity);
+
+    }
+
+
 }
