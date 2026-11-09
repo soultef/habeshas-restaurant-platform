@@ -59,5 +59,16 @@ public class RestaurantLocationServiceImpl implements RestaurantLocationService 
         return locationMapper.toResponseDto(location);
     }
 
+    @Override
+    public List<RestaurantLocationResponseDto> getAllLocations() {
+
+        List<RestaurantLocationEntity> allLocations =
+                locationRepository.findAll();
+
+        return allLocations.stream()
+                .map(locationMapper::toResponseDto)
+                .toList();
+    }
+
 
 }

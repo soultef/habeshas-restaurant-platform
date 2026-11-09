@@ -14,8 +14,9 @@ public interface RestaurantLocationService {
     // Retrieve a location by ID
     RestaurantLocationResponseDto getLocationById(UUID id);
 
-//    // Retrieve all restaurant locations
-//    List<RestaurantLocationResponseDto> getAllLocations();
+    // Retrieve all restaurant locations
+    List<RestaurantLocationResponseDto> getAllLocations();
+
 //
 //    // Retrieve locations belonging to a specific brand
 //    List<RestaurantLocationResponseDto> getLocationsByBrandId(UUID brandId);
