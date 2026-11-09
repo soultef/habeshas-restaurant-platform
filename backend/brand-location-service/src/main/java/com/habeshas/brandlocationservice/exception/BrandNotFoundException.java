@@ -8,4 +8,9 @@ public class BrandNotFoundException extends RuntimeException{
     {
         super("Restaurant brand not found with id " + id);
     }
+
+    public BrandNotFoundException()
+    {
+        super("Restaurant brand not found");
+    }
 }

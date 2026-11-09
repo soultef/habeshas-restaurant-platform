@@ -49,4 +49,12 @@ public class RestaurantBrandServiceImpl implements RestaurantBrandService {
         return toResponse.toResponseDto(updatedBrand);
     }
 
+    @Override
+    public RestaurantBrandEntity getRestaurantBrand() {
+
+        return brandRepository
+                .findFirstByOrderByCreatedAtAsc()
+                .orElseThrow(BrandNotFoundException::new);
+    }
+
 }

@@ -1,51 +1,51 @@
 package com.habeshas.brandlocationservice.location.service;
 
+import com.habeshas.brandlocationservice.brand.entity.RestaurantBrandEntity;
+import com.habeshas.brandlocationservice.brand.mapper.RestaurantBrandMapper;
+import com.habeshas.brandlocationservice.brand.repository.RestaurantBrandRepository;
+import com.habeshas.brandlocationservice.brand.service.RestaurantBrandService;
 import com.habeshas.brandlocationservice.location.dtos.RestaurantLocationRequestDto;
 import com.habeshas.brandlocationservice.location.dtos.RestaurantLocationResponseDto;
+import com.habeshas.brandlocationservice.location.entity.RestaurantLocationEntity;
+import com.habeshas.brandlocationservice.location.mapper.RestaurantLocationMapper;
+import com.habeshas.brandlocationservice.location.repository.RestaurantLocationRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class RestaurantLocationServiceImpl implements RestaurantLocationService {
 
+
+    private final  RestaurantLocationRepository locationRepository;
+    private final RestaurantLocationMapper locationMapper;
+    private final RestaurantBrandService brandService;
+
+
+    public RestaurantLocationServiceImpl(RestaurantLocationRepository locationRepository,
+                                         RestaurantLocationMapper locationMapper,
+                                         RestaurantBrandService brandService) {
+        this.locationRepository = locationRepository;
+        this.locationMapper = locationMapper;
+        this.brandService = brandService;
+    }
+
     @Override
     public RestaurantLocationResponseDto createLocation(
-            RestaurantLocationRequestDto request) {
-        return null;
+            RestaurantLocationRequestDto requestDto) {
+
+        RestaurantBrandEntity brand = brandService.getRestaurantBrand();
+
+        RestaurantLocationEntity locationEntity =
+                locationMapper.toEntity(requestDto, brand);
+
+        RestaurantLocationEntity savedLocation =
+                locationRepository.save(locationEntity);
+
+        return locationMapper.toResponseDto(savedLocation);
     }
 
-    @Override
-    public RestaurantLocationResponseDto getLocationById(UUID id) {
-        return null;
-    }
 
-    @Override
-    public List<RestaurantLocationResponseDto> getAllLocations() {
-        return null;
-    }
-
-    @Override
-    public List<RestaurantLocationResponseDto> getLocationsByBrandId(UUID brandId) {
-        return null;
-    }
-
-    @Override
-    public RestaurantLocationResponseDto updateLocation(
-            UUID id,
-            RestaurantLocationRequestDto request) {
-        return null;
-    }
-
-    @Override
-    public RestaurantLocationResponseDto updateLocationStatus(
-            UUID id,
-            String status) {
-        return null;
-    }
-
-    @Override
-    public void deleteLocation(UUID id) {
-    }
 }
