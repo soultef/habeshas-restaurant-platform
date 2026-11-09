@@ -11,9 +11,9 @@ public interface RestaurantLocationService {
 
     RestaurantLocationResponseDto createLocation( RestaurantLocationRequestDto request);
 
-//    // Retrieve a location by ID
-//    RestaurantLocationResponseDto getLocationById(UUID id);
-//
+    // Retrieve a location by ID
+    RestaurantLocationResponseDto getLocationById(UUID id);
+
 //    // Retrieve all restaurant locations
 //    List<RestaurantLocationResponseDto> getAllLocations();
 //

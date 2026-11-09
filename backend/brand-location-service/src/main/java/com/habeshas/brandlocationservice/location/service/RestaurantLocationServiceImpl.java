@@ -4,11 +4,14 @@ import com.habeshas.brandlocationservice.brand.entity.RestaurantBrandEntity;
 import com.habeshas.brandlocationservice.brand.mapper.RestaurantBrandMapper;
 import com.habeshas.brandlocationservice.brand.repository.RestaurantBrandRepository;
 import com.habeshas.brandlocationservice.brand.service.RestaurantBrandService;
+import com.habeshas.brandlocationservice.exception.BrandNotFoundException;
+import com.habeshas.brandlocationservice.exception.LocationNotFoundException;
 import com.habeshas.brandlocationservice.location.dtos.RestaurantLocationRequestDto;
 import com.habeshas.brandlocationservice.location.dtos.RestaurantLocationResponseDto;
 import com.habeshas.brandlocationservice.location.entity.RestaurantLocationEntity;
 import com.habeshas.brandlocationservice.location.mapper.RestaurantLocationMapper;
 import com.habeshas.brandlocationservice.location.repository.RestaurantLocationRepository;
+import org.springframework.boot.context.config.ConfigDataLocationNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,6 +48,15 @@ public class RestaurantLocationServiceImpl implements RestaurantLocationService 
                 locationRepository.save(locationEntity);
 
         return locationMapper.toResponseDto(savedLocation);
+    }
+
+    @Override
+    public RestaurantLocationResponseDto getLocationById(UUID id)
+    {
+       RestaurantLocationEntity location = locationRepository.findById(id)
+               .orElseThrow(() -> new LocationNotFoundException(id));
+
+        return locationMapper.toResponseDto(location);
     }
 
 
