@@ -1,6 +1,7 @@
 package com.habeshas.brandlocationservice.location.service;
 
 import com.habeshas.brandlocationservice.brand.entity.RestaurantBrandEntity;
+import com.habeshas.brandlocationservice.enums.LocationStatus;
 import com.habeshas.brandlocationservice.location.dtos.RestaurantLocationRequestDto;
 import com.habeshas.brandlocationservice.location.dtos.RestaurantLocationResponseDto;
 
@@ -19,17 +20,10 @@ public interface RestaurantLocationService {
 
 
     // Update an existing location
-    RestaurantLocationResponseDto updateLocation(
-            UUID id,
-            RestaurantLocationRequestDto request
-    );
-//
-//    // Update location status
-//    RestaurantLocationResponseDto updateLocationStatus(
-//            UUID id,
-//            String status
-//    );
-//
-//    // Delete a location
-//    void deleteLocation(UUID id);
+    RestaurantLocationResponseDto updateLocation(UUID id, RestaurantLocationRequestDto request);
+
+    // Update location status
+    RestaurantLocationResponseDto updateLocationStatus(UUID id, LocationStatus status);
+    RestaurantLocationResponseDto deactivateLocation(UUID id);
+    RestaurantLocationResponseDto activateLocation(UUID id);
 }

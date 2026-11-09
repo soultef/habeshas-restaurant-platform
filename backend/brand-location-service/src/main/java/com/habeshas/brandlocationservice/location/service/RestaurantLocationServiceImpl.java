@@ -4,6 +4,7 @@ import com.habeshas.brandlocationservice.brand.entity.RestaurantBrandEntity;
 import com.habeshas.brandlocationservice.brand.mapper.RestaurantBrandMapper;
 import com.habeshas.brandlocationservice.brand.repository.RestaurantBrandRepository;
 import com.habeshas.brandlocationservice.brand.service.RestaurantBrandService;
+import com.habeshas.brandlocationservice.enums.LocationStatus;
 import com.habeshas.brandlocationservice.exception.BrandNotFoundException;
 import com.habeshas.brandlocationservice.exception.LocationNotFoundException;
 import com.habeshas.brandlocationservice.location.dtos.RestaurantLocationRequestDto;
@@ -35,6 +36,12 @@ public class RestaurantLocationServiceImpl implements RestaurantLocationService 
         this.brandService = brandService;
     }
 
+    private RestaurantLocationEntity findLocationEntityById(UUID id)
+    {
+        return locationRepository.findById(id)
+                .orElseThrow(() -> new LocationNotFoundException(id));
+    }
+
     @Override
     public RestaurantLocationResponseDto createLocation(
             RestaurantLocationRequestDto requestDto) {
@@ -53,9 +60,7 @@ public class RestaurantLocationServiceImpl implements RestaurantLocationService 
     @Override
     public RestaurantLocationResponseDto getLocationById(UUID id)
     {
-       RestaurantLocationEntity location = locationRepository.findById(id)
-               .orElseThrow(() -> new LocationNotFoundException(id));
-
+       RestaurantLocationEntity location = findLocationEntityById(id);
         return locationMapper.toResponseDto(location);
     }
 
@@ -76,13 +81,19 @@ public class RestaurantLocationServiceImpl implements RestaurantLocationService 
     public RestaurantLocationResponseDto updateLocation(
             UUID id, RestaurantLocationRequestDto request){
 
-        RestaurantLocationEntity locationEntity = locationRepository
-                .findById(id).orElseThrow(() -> new LocationNotFoundException(id));
-
+        RestaurantLocationEntity locationEntity = findLocationEntityById(id);
         locationMapper.updateLocation(locationEntity, request);
-
         return locationMapper.toResponseDto(locationEntity);
 
+    }
+
+
+    @Override
+    public RestaurantLocationResponseDto updateLocationStatus(
+            UUID id, LocationStatus status){
+
+       RestaurantLocationEntity locationEntity = findLocationEntityById(id);
+        return locationMapper.toResponseDto(locationEntity);
     }
 
 
