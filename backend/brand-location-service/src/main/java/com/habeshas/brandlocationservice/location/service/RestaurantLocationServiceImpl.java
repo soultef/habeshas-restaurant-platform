@@ -90,11 +90,17 @@ public class RestaurantLocationServiceImpl implements RestaurantLocationService 
 
     @Override
     public RestaurantLocationResponseDto updateLocationStatus(
-            UUID id, LocationStatus status){
+            UUID id,
+            LocationStatus status) {
 
-       RestaurantLocationEntity locationEntity = findLocationEntityById(id);
-        return locationMapper.toResponseDto(locationEntity);
+        RestaurantLocationEntity location = findLocationEntityById(id);
+
+        location.setStatus(status);
+
+        RestaurantLocationEntity updatedLocation =
+                locationRepository.save(location);
+
+        return locationMapper.toResponseDto(updatedLocation);
     }
-
 
 }

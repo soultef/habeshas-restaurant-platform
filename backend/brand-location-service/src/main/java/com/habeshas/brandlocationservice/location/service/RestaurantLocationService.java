@@ -24,6 +24,5 @@ public interface RestaurantLocationService {
 
     // Update location status
     RestaurantLocationResponseDto updateLocationStatus(UUID id, LocationStatus status);
-    RestaurantLocationResponseDto deactivateLocation(UUID id);
-    RestaurantLocationResponseDto activateLocation(UUID id);
+
 }
