@@ -6,6 +6,8 @@ import com.habeshas.brandlocationservice.location.dtos.RestaurantLocationRespons
 import com.habeshas.brandlocationservice.location.entity.RestaurantLocationEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class RestaurantLocationMapper {
 
@@ -24,7 +26,7 @@ public class RestaurantLocationMapper {
         );
     }
 
-    public RestaurantLocationResponseDto toDto(
+    public RestaurantLocationResponseDto toResponseDto(
             RestaurantLocationEntity locationEntity
     ) {
         return new RestaurantLocationResponseDto(
@@ -39,5 +41,16 @@ public class RestaurantLocationMapper {
                 locationEntity.getUpdatedAt(),
                 locationEntity.getStatus()
         );
+    }
+
+    public void updateLocation(RestaurantLocationEntity locationEntity,
+                               RestaurantLocationRequestDto requestDto)
+    {
+        locationEntity.setLocationName(requestDto.locationName());
+        locationEntity.setAddress(requestDto.address());
+        locationEntity.setEmail(requestDto.email());
+        locationEntity.setPhoneNumber(requestDto.phone());
+        locationEntity.setStatus(requestDto.status());
+        locationEntity.setTimezone(requestDto.timeZone());
     }
 }

@@ -4,8 +4,13 @@ import java.util.UUID;
 
 public class BrandNotFoundException extends RuntimeException{
 
-    BrandNotFoundException(UUID id)
+    public BrandNotFoundException(UUID id)
     {
         super("Restaurant brand not found with id " + id);
+    }
+
+    public BrandNotFoundException()
+    {
+        super("Restaurant brand not found");
     }
 }

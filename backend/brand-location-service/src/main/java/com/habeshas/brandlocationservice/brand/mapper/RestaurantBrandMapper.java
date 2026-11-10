@@ -25,4 +25,12 @@ public class RestaurantBrandMapper {
                 entity.getUpdatedAt()
         );
     }
+
+    public void updateBrand(
+            RestaurantBrandRequestDto requestDto,
+            RestaurantBrandEntity entity
+    ) {
+        entity.setBrandName(requestDto.name());
+        entity.setDescription(requestDto.description());
+    }
 }

@@ -5,7 +5,7 @@ import java.util.UUID;
 public class LocationNotFoundException extends RuntimeException{
 
 
-    LocationNotFoundException(UUID id)
+    public LocationNotFoundException(UUID id)
     {
         super("Restaurant location not found with id" + id);
     }
