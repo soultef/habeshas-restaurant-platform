@@ -14,14 +14,17 @@ import java.util.UUID;
 public class RestaurantBrandServiceImpl implements RestaurantBrandService {
 
     private final RestaurantBrandRepository brandRepository;
-    private final RestaurantBrandMapper toResponse;
+    private final RestaurantBrandMapper brandMapper;
 
     public RestaurantBrandServiceImpl(RestaurantBrandRepository brandRepository,
-                                      RestaurantBrandMapper toResponse)
+                                      RestaurantBrandMapper toResponse, RestaurantBrandMapper brandMapper)
     {
         this.brandRepository = brandRepository;
-        this.toResponse = toResponse;
+        this.brandMapper = brandMapper;
+
     }
+
+
 
     @Override
     public RestaurantBrandResponseDto getBrandById(UUID id) {
@@ -30,9 +33,8 @@ public class RestaurantBrandServiceImpl implements RestaurantBrandService {
                 .orElseThrow(() ->
                         new BrandNotFoundException(id));
 
-        return toResponse.toResponseDto(brandEntity);
+        return brandMapper.toResponseDto(brandEntity);
     }
-
 
     @Override
     public RestaurantBrandResponseDto updateBrand(
@@ -42,11 +44,9 @@ public class RestaurantBrandServiceImpl implements RestaurantBrandService {
         RestaurantBrandEntity brandEntity = brandRepository.findById(id)
                 .orElseThrow(() -> new BrandNotFoundException(id));
 
-        toResponse.updateBrand(brandRequestDto, brandEntity);
-
-        RestaurantBrandEntity updatedBrand = brandRepository.save(brandEntity);
-
-        return toResponse.toResponseDto(updatedBrand);
+        brandMapper.updateBrand(brandRequestDto, brandEntity);
+        brandRepository.save(brandEntity);
+        return brandMapper.toResponseDto(brandEntity);
     }
 
     @Override
