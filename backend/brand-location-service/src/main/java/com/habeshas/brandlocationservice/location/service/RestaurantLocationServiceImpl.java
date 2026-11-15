@@ -94,7 +94,6 @@ public class RestaurantLocationServiceImpl implements RestaurantLocationService 
             LocationStatus status) {
 
         RestaurantLocationEntity location = findLocationEntityById(id);
-
         location.setStatus(status);
 
         RestaurantLocationEntity updatedLocation =
