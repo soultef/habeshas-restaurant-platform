@@ -4,8 +4,7 @@ package com.habeshas.brandlocationservice.brand.controller;
 import com.habeshas.brandlocationservice.brand.dtos.RestaurantBrandRequestDto;
 import com.habeshas.brandlocationservice.brand.dtos.RestaurantBrandResponseDto;
 import com.habeshas.brandlocationservice.brand.service.RestaurantBrandService;
-import com.habeshas.brandlocationservice.location.dtos.RestaurantLocationResponseDto;
-import org.springframework.http.HttpStatus;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +22,7 @@ public class BrandController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<RestaurantBrandResponseDto> getBrandById(@PathVariable UUID id) {
+    public ResponseEntity<RestaurantBrandResponseDto> getBrandById(@PathVariable @Valid UUID id) {
 
         RestaurantBrandResponseDto response = restaurantBrand.getBrandById(id);
         return ResponseEntity.ok(response);
@@ -31,7 +30,7 @@ public class BrandController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<RestaurantBrandResponseDto> updateBrand(@PathVariable UUID id,
+    public ResponseEntity<RestaurantBrandResponseDto> updateBrand(@PathVariable @Valid UUID id,
                  @RequestBody RestaurantBrandRequestDto requestDto)
     {
         RestaurantBrandResponseDto updatedBrand = restaurantBrand.updateBrand(id, requestDto);
