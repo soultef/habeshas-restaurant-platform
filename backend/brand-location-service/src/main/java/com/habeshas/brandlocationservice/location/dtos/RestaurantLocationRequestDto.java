@@ -32,5 +32,8 @@ public record RestaurantLocationRequestDto(
         @NotNull(message = "Location status is required")
         LocationStatus status
 
+
+
+
 ) {
 }
